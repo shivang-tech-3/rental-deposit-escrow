@@ -41,12 +41,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: |
-          rm -f package-lock.json
-          npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Run Vitest Unit Tests
-        run: npm run test
+        run: npx vitest run --reporter=verbose
 
       - name: Build Next.js
         run: npm run build
