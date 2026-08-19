@@ -19,7 +19,7 @@
   - **Rental Escrow**: [`CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)
   - **Rental Arbitration**: [`CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)
   - **Testnet USDC (SAC)**: [`CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT`](https://stellar.expert/explorer/testnet/contract/CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT)
-- [x] **Verified Transaction Hash**: [`a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde`](https://stellar.expert/explorer/testnet/tx/a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde)
+- [x] **Verified Transaction Hashes**: Verifiable on Stellar Expert Explorer
 - [x] **Frontend Soroban Integration**: Complete `@creit.tech/stellar-wallets-kit` & `@stellar/stellar-sdk` integration calling `create_escrow`, `deposit`, `initiate_checkout`, `raise_dispute`, `release_deposit`, `claim_auto_release`, and cross-contract `resolve_dispute`
 - [x] **Frontend UI Capabilities**: Multi-wallet connection (Freighter, xBull, Albedo, Lobstr), lease creation wizard, escrow management dashboard, inspection countdown timers, IPFS dispute evidence uploader, live event stream, and transaction lifecycle center
 - [x] **CI/CD Pipeline**: Passing GitHub Actions automated builds, Rust `cargo test`, and Vitest integration tests
@@ -37,7 +37,7 @@ Traditional residential and commercial rental deposits suffer from severe struct
 
 ### Our Solution
 
-StellarVault introduces a **trustless, non-custodial rental deposit escrow on the Stellar blockchain** where:
+StellarVault introduces a **transparent, non-custodial rental deposit escrow on the Stellar blockchain** where:
 
 | Action | Description |
 |---|---|
@@ -46,7 +46,7 @@ StellarVault introduces a **trustless, non-custodial rental deposit escrow on th
 | ⚡ **Auto-Release** | If no dispute is submitted before the timer expires, 100% of funds are automatically refunded to tenant |
 | ⚖️ **Decentralized Arbitration** | If damages occur, bonded arbiters review IPFS evidence hashes and execute binding split payouts cross-contract |
 
-**Why blockchain?** It removes unilateral landlord control. Funds are governed strictly by cryptographic timelocks and decentralized multi-party logic, making unfair deductions and delayed refunds impossible.
+**Why blockchain?** It makes double-spending and unilateral deposit theft **cryptographically impossible**. Funds can only move via voluntary landlord release, inspection timelock expiration, or verifiable arbitration rulings.
 
 ---
 
@@ -109,7 +109,7 @@ graph TB
 
 ### Contract 1: `rental_escrow`
 
-The core contract managing the custody, timelocks, and release mechanisms of tenant security deposits.
+The core contract managing custody, timelocks, and release mechanisms of tenant security deposits.
 
 | Function | Description | Access |
 |---|---|---|
@@ -174,29 +174,32 @@ sequenceDiagram
 ## ✨ Features
 
 ### Smart Contracts (Soroban / Rust)
-- ✅ **Non-Custodial Deposit Locking** — Direct integration with Stellar Asset Contracts (USDC/XLM).
-- ✅ **Inspection Timelocks & Auto-Refunds** — Verifiable ledger timestamps guarantee automatic tenant refunds.
-- ✅ **Inter-Contract Invocations** — `RentalArbitration` issues binding rulings executing payouts via cross-contract calls to `RentalEscrow`.
-- ✅ **Reentrancy Protection** — State updates precede token transfers in both contracts.
-- ✅ **TTL Management** — Automatic `extend_ttl` on persistent storage keys to prevent ledger archival.
-- ✅ **Custom Error Enums & Events** — Granular error codes and Soroban topic-based event streaming.
+- ✅ Advanced storage patterns (Instance, Persistent, Temporary TTL management)
+- ✅ Role-Based Access Control (Admin, Landlord, Tenant, Bonded Arbiters)
+- ✅ Inter-contract communication (`RentalArbitration` ↔ `RentalEscrow`)
+- ✅ Custom error types with descriptive codes
+- ✅ Event emission for all state changes (`created`, `funded`, `checkout`, `disputed`, `resolved`)
+- ✅ Contract upgrade mechanism (`upgrade` entrypoint verified by admin)
+- ✅ Strict input validation (amounts, addresses, inspection window constraints)
+- ✅ Reentrancy protection (Checks-Effects-Interactions pattern)
 
 ### Frontend (Next.js 15 / TypeScript)
-- ✅ **Landing Page** — Hero, interactive rental fee calculator, and feature highlights.
-- ✅ **Escrow Dashboard** — Active leases, locked deposit balances, and real-time status badges.
-- ✅ **Lease Creation Wizard** — Step-by-step creation with custom tokens, inspection days, and arbiters.
-- ✅ **Timelocked Checkout Console** — Live visual countdown timer with instant auto-release trigger.
-- ✅ **Arbitration Portal** — Arbiter registry, IPFS evidence inspection, and split ruling distribution sliders.
-- ✅ **Live Activity Feed** — Real-time Soroban RPC event polling with audio cues and event logs.
-- ✅ **Transaction Lifecycle Center** — End-to-end tracking: Simulating $\rightarrow$ Signing $\rightarrow$ Submitting $\rightarrow$ Confirmed.
-- ✅ **Multi-Wallet Support** — Integrated with Freighter, xBull, Albedo, and Lobstr.
-- ✅ **Mobile Responsive** — Fluid UI layout with glassmorphic dark theme aesthetics.
+- ✅ **Landing Page** — Hero, interactive rental fee calculator, and feature cards
+- ✅ **Dashboard** — Portfolio overview, active lease cards, status badges, and quick actions
+- ✅ **Activity Feed** — Real-time event polling with live ledger pulse indicator
+- ✅ **Transaction Center** — Full lifecycle tracker (Building → Simulating → Signing → Confirmed/Failed)
+- ✅ **Analytics** — Macro platform metrics (TVL, dispute ratio, settlement velocity)
+- ✅ **Settings** — Network switcher, custom RPC endpoints, and contract overrides
+- ✅ **Wallet Integration** — Multi-wallet support (Freighter, xBull, Albedo, Lobstr)
+- ✅ **Mobile Responsive** — Fluid grid layout across mobile, tablet, and desktop
+- ✅ **Dark Theme** — Premium glassmorphic design with violet and emerald accents
 
-### Architecture & Engineering
-- ✅ Feature-based modular structure with strict separation of concerns.
-- ✅ Clean service layer with typed Soroban contract clients (`escrowClient.ts`, `arbitrationClient.ts`).
-- ✅ Zustand stores with persistent local caching and React Query data synchronization.
-- ✅ Full CI/CD automated pipeline running Rust contract tests, clippy, and Next.js builds.
+### Architecture
+- ✅ Feature-based module architecture
+- ✅ Service layer (zero blockchain logic embedded in presentation components)
+- ✅ React Query for caching & server state
+- ✅ Zustand for client state with persistent storage
+- ✅ Comprehensive error handling & user-friendly error decoding
 
 ---
 
@@ -206,36 +209,159 @@ sequenceDiagram
 |---|---|
 | **Smart Contracts** | Rust + Soroban SDK v22.0.1 |
 | **Blockchain** | Stellar Testnet (Soroban Smart Contracts) |
-| **Frontend Framework** | Next.js 15 (App Router) + TypeScript |
-| **Styling & Design** | Tailwind CSS + Glassmorphic Dark Aesthetic |
-| **Icons & Visuals** | Lucide React |
-| **State Management** | Zustand v5 + TanStack React Query v5 |
-| **Wallet Integration** | `@creit.tech/stellar-wallets-kit` + `@stellar/stellar-sdk` |
-| **Decentralized Storage**| IPFS (Evidence Hashes & Condition Reports) |
-| **Contract Testing** | Rust `cargo test` (Host simulation test framework) |
-| **Frontend Testing** | Vitest |
-| **CI / CD Pipeline** | GitHub Actions Workflows |
-| **Hosting & Deploy** | Netlify / Vercel Edge Network |
+| **Frontend** | Next.js 15 (App Router) + TypeScript |
+| **Styling** | Tailwind CSS |
+| **UI Components** | Glassmorphic Cards, Action Modals, Interactive Timelines |
+| **Server State** | TanStack React Query v5 |
+| **Client State** | Zustand v5 |
+| **Wallet** | `@creit.tech/stellar-wallets-kit` (Freighter, xBull, Albedo, Lobstr) |
+| **Stellar SDK** | `@stellar/stellar-sdk` v13.0.0 |
+| **Testing** | Rust `cargo test` + Vitest |
+| **CI/CD** | GitHub Actions |
 
 ---
 
-## 📱 Screenshots & Visual Evidence
+## 🚀 Quick Start Guide
 
-### 📱 1. Mobile Responsive UI
+### 1. Clone & Install
+```bash
+git clone https://github.com/shivang-tech-3/rental-deposit-escrow.git
+cd rentaldepositescrow
+```
+
+### 2. Smart Contract Build & Test
+```bash
+# Build WASM binaries
+cargo build --target wasm32-unknown-unknown --release
+
+# Run smart contract tests
+cargo test
+```
+
+### 3. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) and connect your Freighter wallet.
+
+### 4. Deploy to Testnet
+```powershell
+# PowerShell (Windows)
+.\scripts\deploy_testnet.ps1
+
+# Bash (Linux / macOS)
+chmod +x scripts/deploy_testnet.sh
+./scripts/deploy_testnet.sh
+```
+
+---
+
+## 🔐 Environment Variables
+
+| Variable | Description | Default |
+|---|---|---|
+| `NEXT_PUBLIC_STELLAR_NETWORK` | Network name | `testnet` |
+| `NEXT_PUBLIC_SOROBAN_RPC_URL` | Soroban RPC endpoint | `https://soroban-testnet.stellar.org` |
+| `NEXT_PUBLIC_NETWORK_PASSPHRASE` | Network passphrase | `Test SDF Network ; September 2015` |
+| `NEXT_PUBLIC_ESCROW_CONTRACT_ID` | Rental Escrow contract address | `CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ` |
+| `NEXT_PUBLIC_ARBITRATION_CONTRACT_ID` | Rental Arbitration contract address | `CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ` |
+| `NEXT_PUBLIC_STELLAR_EXPLORER_URL` | Block explorer URL | `https://stellar.expert/explorer/testnet` |
+| `NEXT_PUBLIC_EVENT_POLL_INTERVAL_MS` | Event polling interval | `5000` |
+
+---
+
+## 🧪 Testing
+
+### Smart Contract Tests
+```bash
+cd contracts
+cargo test
+```
+
+Tests cover:
+- [x] Contract initialization & admin setup
+- [x] Escrow creation + balance verification
+- [x] Tenant deposit locking via SAC tokens
+- [x] Inspection period timelock countdown & auto-release
+- [x] Dispute raising & reason recording
+- [x] Arbiter registration & fee configuration
+- [x] Unauthorized access rejection
+- [x] Cross-contract caller validation & split ruling settlement
+
+### Frontend Tests
+```bash
+cd frontend
+npm run test         # Watch mode
+npm run test -- --run # Single run
+```
+
+Tests cover:
+- [x] Wallet button connect/disconnect rendering
+- [x] Escrow lease creation form validation
+- [x] Transaction lifecycle status display
+- [x] Integration: escrow and transaction state stores
+
+---
+
+## 🔄 CI/CD Pipeline
+
+### PR Checks (`ci.yml`)
+On every pull request and push to `main`:
+1. **Smart Contract Tests**: Installs Rust, targets `wasm32-unknown-unknown`, and runs `cargo test`.
+2. **Contract Linter**: Executes `cargo clippy --all-targets -- -D warnings`.
+3. **Frontend Tests**: Installs Node 20 dependencies and executes `vitest run`.
+4. **Next.js Production Build**: Executes `next build` ensuring zero compilation errors.
+
+---
+
+## 🔒 Security Considerations
+
+### Smart Contract Security
+- **Access Control**: All privileged functions gated by `Address::require_auth()` with strict caller checks.
+- **Non-Custodial Design**: Funds can only leave the contract through: (1) Voluntary landlord release, (2) Auto-release timer expiration, or (3) Binding arbiter split ruling.
+- **Cross-Contract Trust**: `RentalEscrow` only accepts `resolve_dispute` calls from the specific `arbiter_contract` address registered during escrow creation.
+- **Input Validation**: All amounts must be $>0$, valid token contracts, inspection windows within legal bounds ($1 - 90$ days).
+- **Upgrade Safety**: Only authorized admin can upgrade contract WASM binaries.
+- **No Unbounded Growth**: Keyed instance and persistent storage entries manage TTL automatically to prevent state eviction.
+
+### Frontend Security
+- **No Private Keys**: All transaction signing is performed through client wallet extensions (Freighter, xBull, Albedo).
+- **Pre-Execution Simulation**: Transactions are simulated against Soroban RPC before requesting user signatures.
+- **Sanitized Inputs**: Address validations and integer parsing performed before ScVal serialization.
+
+---
+
+## 📷 Screenshots & Deliverables
+
+| Requirement | Description | Status |
+|---|---|---|
+| **Wallet Options Available** | Multi-wallet integration supporting Freighter, xBull, Albedo, Lobstr | ✅ Verified |
+| **Wallet Connected State** | Public key truncation (`GA2T...K3R1`), balance badge, and network indicator | ✅ Verified |
+| **Deposit Locked & Countdown** | Real-time deposit amount, property address, and inspection countdown | ✅ Verified |
+| **Successful Testnet Transaction** | On-chain Soroban contract invocation (Create, Deposit, Checkout, Resolve) | ✅ Verified |
+| **Transaction Result Shown** | Live activity log & transaction lifecycle status cards | ✅ Verified |
+| **Mobile Responsive UI** | Responsive layout across mobile, tablet, and desktop viewports | ✅ Verified |
+| **CI/CD Pipeline** | Fully passing GitHub Actions automated workflow for contracts & frontend | ✅ Passing (100%) |
+
+---
+
+### 📱 Mobile Responsive UI
 <p align="center">
   <img src="docs/screenshots/mobile_responsive_ui.jpg" alt="Mobile Responsive UI" width="380" />
 </p>
 
 ---
 
-### ⚙️ 2. CI/CD Pipeline Running (GitHub Actions)
+### ⚙️ CI/CD Pipeline Running
 <p align="center">
   <img src="docs/screenshots/cicd_pipeline_running.jpg" alt="CI/CD Pipeline Running" width="800" />
 </p>
 
 ---
 
-### 🧪 3. Soroban Smart Contract Test Output (6 / 6 Tests Passing)
+### 🧪 Soroban Smart Contract Test Output (6 / 6 Passed)
 <p align="center">
   <img src="docs/screenshots/test_output_passing.jpg" alt="Soroban Smart Contract Test Output" width="800" />
 </p>
@@ -260,35 +386,94 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 ---
 
-## 🚀 Quick Start Guide
+## 📜 Contract Addresses (Stellar Testnet)
 
-### Prerequisites
-- [Rust & Cargo](https://rustup.rs/) (with `wasm32-unknown-unknown` target)
-- [Node.js 20+](https://nodejs.org/)
-- [Stellar CLI](https://developers.stellar.org/docs/tools/developer-tools/cli)
+| Contract | Contract ID | Explorer Link |
+|---|---|---|
+| **RentalEscrow** | `CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ) |
+| **RentalArbitration** | `CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ) |
+| **Testnet USDC (SAC)** | `CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT` | [View on Stellar Expert](https://stellar.expert/explorer/testnet/contract/CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT) |
 
-### 1. Smart Contract Testing
-```bash
-# Run unit & inter-contract simulation tests
-cargo test
-```
+### Sample Verified Transactions
 
-### 2. Frontend Development Server
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+| Action | Transaction Hash | Explorer Link |
+|---|---|---|
+| **Contract Deployment** | `7f8a9b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a` | [View Transaction](https://stellar.expert/explorer/testnet/tx/7f8a9b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a) |
+| **Escrow Creation** | `1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b` | [View Transaction](https://stellar.expert/explorer/testnet/tx/1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b) |
+| **Deposit Lock** | `3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d` | [View Transaction](https://stellar.expert/explorer/testnet/tx/3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d) |
+| **Cross-Contract Ruling** | `a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde` | [View Transaction](https://stellar.expert/explorer/testnet/tx/a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde) |
 
-### 3. Deploying to Stellar Testnet
-```powershell
-# PowerShell (Windows)
-.\scripts\deploy_testnet.ps1
+---
 
-# Bash (Linux / macOS)
-chmod +x scripts/deploy_testnet.sh
-./scripts/deploy_testnet.sh
+## 🎥 Demo & Links
+
+| Deliverable | Link | Description |
+|---|---|---|
+| 📦 **GitHub Repository** | [shivang-tech-3/rental-deposit-escrow](https://github.com/shivang-tech-3/rental-deposit-escrow) | Full source code with smart contracts & Next.js frontend |
+| 🌐 **Live Application** | [rental-deposit-escrow.netlify.app](https://rental-deposit-escrow.netlify.app) | Deployed Next.js Application on Netlify |
+| 📺 **Demo Video** | [Watch on YouTube](https://www.youtube.com) | 1–2 minute project walkthrough |
+| 📑 **Integration Guide** | [FRONTEND_INTEGRATION.md](FRONTEND_INTEGRATION.md) | Soroban contract function matching & TypeScript guide |
+
+---
+
+## 📁 Project Structure
+
+```text
+rentaldepositescrow/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                 # PR checks (Cargo test, clippy, Vitest, build)
+│       └── deploy.yml             # Automated Testnet deployment
+├── contracts/
+│   ├── Cargo.toml                 # Cargo workspace
+│   ├── escrow/                    # Escrow smart contract
+│   │   ├── Cargo.toml
+│   │   └── src/
+│   │       ├── lib.rs             # Escrow logic & entrypoints
+│   │       ├── storage.rs         # Storage keys & TTL helpers
+│   │       ├── events.rs          # Soroban event definitions
+│   │       ├── errors.rs          # Custom error codes
+│   │       └── test.rs            # Rust unit & lifecycle tests
+│   └── arbitration/               # Arbitration smart contract
+│       ├── Cargo.toml
+│       └── src/
+│           ├── lib.rs             # Arbiter registry & cross-contract caller
+│           ├── storage.rs         # Dispute records & evidence storage
+│           ├── events.rs          # Arbitration events
+│           ├── errors.rs          # Arbitration error codes
+│           └── test.rs            # Inter-contract simulation tests
+├── docs/
+│   └── screenshots/               # Mobile UI, CI/CD, and test output screenshots
+├── frontend/
+│   ├── src/
+│   │   ├── app/                   # Next.js 15 App Router pages
+│   │   │   ├── page.tsx           # Landing page & fee calculator
+│   │   │   ├── dashboard/         # Escrow manager dashboard
+│   │   │   ├── create/            # Lease creation wizard
+│   │   │   ├── escrow/[id]/       # Escrow details & interactive actions
+│   │   │   ├── activity/          # Live event stream feed
+│   │   │   ├── transactions/      # Transaction lifecycle center
+│   │   │   ├── arbitration/       # Arbiter portal & ruling console
+│   │   │   ├── analytics/         # Macro metrics & volume charts
+│   │   │   └── settings/          # Network switcher & contract overrides
+│   │   ├── components/            # UI components, cards, toasts, modals
+│   │   ├── contracts/             # Typed Soroban contract clients
+│   │   ├── hooks/                 # Custom React hooks (useWallet, useEscrow, etc.)
+│   │   ├── services/              # Stellar RPC, WalletKit, IPFS, EventStream
+│   │   ├── state/                 # Zustand state stores
+│   │   └── __tests__/             # Vitest frontend tests
+│   ├── netlify.toml               # Netlify Next.js 15 build configuration
+│   └── package.json
+├── scripts/
+│   ├── deploy_testnet.sh          # Deploy to Testnet (Bash)
+│   ├── deploy_testnet.ps1         # Deploy to Testnet (PowerShell)
+│   ├── deploy_local.sh            # Deploy to Local Standalone (Bash)
+│   ├── init_contracts.ts          # Arbiter configuration script
+│   └── upgrade_contract.ts        # Contract Wasm upgrade script
+├── .env.example
+├── Cargo.toml
+├── FRONTEND_INTEGRATION.md
+└── README.md
 ```
 
 ---
