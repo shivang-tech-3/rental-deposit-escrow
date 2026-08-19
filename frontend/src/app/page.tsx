@@ -8,7 +8,6 @@ import {
   Lock,
   Scale,
   ArrowRight,
-  Sparkles,
   CheckCircle,
   Clock,
   ExternalLink,
@@ -32,12 +31,6 @@ export default function LandingPage() {
       <section className="text-center space-y-8 relative max-w-5xl mx-auto">
         {/* Luminous Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-cyan-500/15 via-purple-600/20 to-amber-500/10 blur-[100px] -z-10 pointer-events-none rounded-full" />
-
-        {/* Smart Contract Badge */}
-        <div className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-semibold text-cyan-300 backdrop-blur-xl shadow-lg shadow-cyan-500/10 hover:border-cyan-400 transition">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-          <span className="tracking-wide">Powered by Stellar Soroban Smart Contracts</span>
-        </div>
 
         {/* Main Title with Prismatic Gradient */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.1] font-display">
