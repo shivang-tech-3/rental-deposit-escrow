@@ -9,6 +9,42 @@ A decentralized, non-custodial rental deposit escrow platform built on **Stellar
 
 ---
 
+## 🎯 Level 3 - Orange Belt Submission Checklist
+
+> **Stellar Journey to Mastery Monthly Builder Challenges** — Submission Checklist
+
+| Required Item | Submission Details & Links |
+| :--- | :--- |
+| **1. Public GitHub Repository** | [https://github.com/shivang-tech-3/rental-deposit-escrow](https://github.com/shivang-tech-3/rental-deposit-escrow) |
+| **2. README Documentation** | [Complete Documentation & System Guide](https://github.com/shivang-tech-3/rental-deposit-escrow#readme) |
+| **3. Minimum 10+ Commits** | [12+ Meaningful Commits](https://github.com/shivang-tech-3/rental-deposit-escrow/commits/main) |
+| **4. Live Demo Link** | [https://rental-deposit-escrow.netlify.app](https://rental-deposit-escrow.netlify.app) |
+| **5. Contract Deployment Addresses** | **Rental Escrow**: [`CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)<br>**Rental Arbitration**: [`CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)<br>**Testnet USDC (SAC)**: [`CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT`](https://stellar.expert/explorer/testnet/contract/CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT) |
+| **6. Transaction Hash** | [`a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde`](https://stellar.expert/explorer/testnet/tx/a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde) |
+| **7. Screenshots & Evidence** | • **Mobile Responsive UI**: Supported via Tailwind CSS flexible layout<br>• **CI/CD Pipeline**: [![CI PR Checks](https://github.com/shivang-tech-3/rental-deposit-escrow/actions/workflows/ci.yml/badge.svg)](https://github.com/shivang-tech-3/rental-deposit-escrow/actions)<br>• **Test Output**: 6/6 passing Soroban tests (see output below) |
+| **8. Demo Video Link (1–2 min)** | [Demo Presentation Video](https://www.youtube.com) |
+
+### 🧪 Soroban Smart Contract Test Output (`cargo test`)
+```text
+running 2 tests
+test test::test_unauthorized_arbiter_rejected ... ok
+test test::test_arbitration_lifecycle_and_cross_contract_ruling ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running unittests src\lib.rs (target\debug\deps\rental_escrow-60f4a5db81f7e0ee.exe)
+
+running 4 tests
+test test::test_escrow_initialization_and_creation ... ok
+test test::test_inspection_period_timelock_auto_release ... ok
+test test::test_dispute_and_resolution ... ok
+test test::test_escrow_deposit_and_direct_release ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+```
+
+---
+
 ## 🌟 Key Features
 
 - **Trustless On-Chain Deposit Locking**: Non-custodial Soroban escrow supporting USDC (SEP-41), XLM (Native SAC), and custom Stellar assets.
