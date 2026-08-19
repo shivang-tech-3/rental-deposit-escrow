@@ -6,7 +6,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   test: {
-    environment: "jsdom",
     globals: true,
     setupFiles: ["./src/__tests__/setup.ts"],
   },

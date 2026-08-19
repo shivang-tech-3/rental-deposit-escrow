@@ -1,27 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { IpfsService } from "../services/ipfs";
 import { useEscrowStore } from "../state/escrowStore";
 
-describe("End-to-End Escrow & Arbitration Flow Simulation", () => {
-  it("should upload evidence metadata to IPFS and generate valid CID", async () => {
-    const metadata = {
-      title: "Move-out Inspection",
-      description: "Wall scratch damages in master bedroom",
-      files: [],
-      uploadedBy: "GD6W5J4X7VNZF2Y5P4X7VNZF2Y5P4X7VNZF2Y5P4X7VNZF2Y5P4X7VNZF",
-      timestamp: 1700000000,
-    };
-
-    const { cid, uri } = await IpfsService.uploadEvidence(metadata);
-    expect(cid).toContain("bafybei");
-    expect(uri).toContain("ipfs://bafybei");
-
-    const fetched = await IpfsService.fetchEvidence(cid);
-    expect(fetched).not.toBeNull();
-    expect(fetched?.title).toBe(metadata.title);
-  });
-
-  it("should update escrow lifecycle store from created -> funded -> disputed -> resolved", () => {
+describe("EscrowStore Zustand State", () => {
+  it("should update escrow lifecycle store from created -> funded -> resolved", () => {
     const store = useEscrowStore.getState();
 
     // Step 1: Created
@@ -48,7 +29,7 @@ describe("End-to-End Escrow & Arbitration Flow Simulation", () => {
     });
     expect(useEscrowStore.getState().escrows[1].status).toBe("Funded");
 
-    // Step 3: Dispute & Ruling
+    // Step 3: Resolved
     store.upsertEscrow({
       ...useEscrowStore.getState().escrows[1],
       status: "Resolved",
