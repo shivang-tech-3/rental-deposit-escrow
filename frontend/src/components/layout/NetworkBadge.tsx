@@ -8,16 +8,16 @@ export function NetworkBadge() {
   const { network, setNetwork } = useWallet();
 
   return (
-    <div className="flex items-center space-x-2 bg-slate-900/80 border border-slate-700/60 rounded-full px-3 py-1 text-xs">
+    <div className="flex items-center space-x-2 bg-slate-900/90 border border-slate-700/70 hover:border-cyan-500/40 transition rounded-full px-3 py-1 text-xs shadow-sm">
       <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
       </span>
-      <Globe className="w-3.5 h-3.5 text-slate-400" />
+      <Globe className="w-3.5 h-3.5 text-cyan-400" />
       <select
         value={network}
         onChange={(e) => setNetwork(e.target.value as StellarNetwork)}
-        className="bg-transparent text-slate-200 focus:outline-none cursor-pointer font-medium"
+        className="bg-transparent text-slate-200 focus:outline-none cursor-pointer font-medium text-xs"
       >
         <option value="TESTNET" className="bg-slate-900 text-slate-200">
           Stellar Testnet

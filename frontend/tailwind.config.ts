@@ -9,6 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-outfit)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+        display: ["var(--font-space-grotesk)", "var(--font-outfit)", "sans-serif"],
+        mono: ["var(--font-space-grotesk)", "ui-monospace", "SFMono-Regular", "monospace"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -29,11 +34,18 @@ const config: Config = {
           foreground: "hsl(var(--accent-foreground))",
         },
         stellar: {
-          blue: "#3E1BDB",
-          light: "#00E5FF",
-          gold: "#FFC700",
+          neon: "#00f0ff",
+          cyan: "#00e5ff",
+          mint: "#00f5d4",
+          blue: "#3b82f6",
+          indigo: "#6366f1",
+          violet: "#9d4edd",
           purple: "#7928CA",
-          dark: "#0a0b10",
+          gold: "#FFC700",
+          amber: "#f59e0b",
+          rose: "#f43f5e",
+          dark: "#030611",
+          card: "#090e1d",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -48,12 +60,22 @@ const config: Config = {
       },
       animation: {
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "glow": "glow 2s ease-in-out infinite alternate",
+        "glow": "glow 3s ease-in-out infinite alternate",
+        "float": "float 6s ease-in-out infinite",
+        "shimmer": "shimmer 3s ease-in-out infinite",
       },
       keyframes: {
         glow: {
-          "0%": { boxShadow: "0 0 15px rgba(0, 229, 255, 0.2)" },
-          "100%": { boxShadow: "0 0 25px rgba(0, 229, 255, 0.6)" },
+          "0%": { boxShadow: "0 0 20px rgba(0, 240, 255, 0.25)" },
+          "100%": { boxShadow: "0 0 35px rgba(157, 78, 221, 0.45)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        shimmer: {
+          "0%, 100%": { opacity: "0.8" },
+          "50%": { opacity: "1" },
         },
       },
     },
