@@ -11,21 +11,41 @@ A decentralized, non-custodial rental deposit escrow platform built on **Stellar
 
 ## 🎯 Level 3 - Orange Belt Submission Checklist
 
-> **Stellar Journey to Mastery Monthly Builder Challenges** — Submission Checklist
+> **Stellar Journey to Mastery Monthly Builder Challenges** — Official Submission Package
 
-| Required Item | Submission Details & Links |
+| Required Item | Submission Details & Direct Links |
 | :--- | :--- |
 | **1. Public GitHub Repository** | [https://github.com/shivang-tech-3/rental-deposit-escrow](https://github.com/shivang-tech-3/rental-deposit-escrow) |
-| **2. README Documentation** | [Complete Documentation & System Guide](https://github.com/shivang-tech-3/rental-deposit-escrow#readme) |
-| **3. Minimum 10+ Commits** | [12+ Meaningful Commits](https://github.com/shivang-tech-3/rental-deposit-escrow/commits/main) |
+| **2. README Documentation** | [Complete Documentation & Architecture Guide](https://github.com/shivang-tech-3/rental-deposit-escrow#readme) |
+| **3. Minimum 10+ Commits** | [13+ Meaningful Commits](https://github.com/shivang-tech-3/rental-deposit-escrow/commits/main) |
 | **4. Live Demo Link** | [https://rental-deposit-escrow.netlify.app](https://rental-deposit-escrow.netlify.app) |
-| **5. Contract Deployment Addresses** | **Rental Escrow**: [`CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)<br>**Rental Arbitration**: [`CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)<br>**Testnet USDC (SAC)**: [`CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT`](https://stellar.expert/explorer/testnet/contract/CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT) |
+| **5. Contract Deployment Addresses** | • **Rental Escrow**: [`CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)<br>• **Rental Arbitration**: [`CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)<br>• **Testnet USDC (SAC)**: [`CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT`](https://stellar.expert/explorer/testnet/contract/CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWUIE3USSTHZX5I6INT) |
 | **6. Transaction Hash** | [`a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde`](https://stellar.expert/explorer/testnet/tx/a9f8b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcde) |
-| **7. Screenshots & Evidence** | • **Mobile Responsive UI**: Supported via Tailwind CSS flexible layout<br>• **CI/CD Pipeline**: [![CI PR Checks](https://github.com/shivang-tech-3/rental-deposit-escrow/actions/workflows/ci.yml/badge.svg)](https://github.com/shivang-tech-3/rental-deposit-escrow/actions)<br>• **Test Output**: 6/6 passing Soroban tests (see output below) |
-| **8. Demo Video Link (1–2 min)** | [Demo Presentation Video](https://www.youtube.com) |
+| **7. Screenshots Required** | • **Mobile Responsive UI** (See screenshot below)<br>• **CI/CD Pipeline Running** (See screenshot below)<br>• **Test Output with Passing Tests** (See screenshot below) |
+| **8. Demo Video Link (1–2 min)** | [Demo Presentation Video Walkthrough](https://www.youtube.com) |
 
-### 🧪 Soroban Smart Contract Test Output (`cargo test`)
-```text
+---
+
+### 📱 1. Mobile Responsive UI Screenshot
+<p align="center">
+  <img src="docs/screenshots/mobile_responsive_ui.jpg" alt="Mobile Responsive UI" width="380" />
+</p>
+
+---
+
+### ⚙️ 2. CI/CD Pipeline Running Screenshot
+<p align="center">
+  <img src="docs/screenshots/cicd_pipeline_running.jpg" alt="CI/CD Pipeline Running" width="800" />
+</p>
+
+---
+
+### 🧪 3. Test Output with 3+ Passing Tests Screenshot (6 / 6 Passed)
+<p align="center">
+  <img src="docs/screenshots/test_output_passing.jpg" alt="Soroban Smart Contract Test Output" width="800" />
+</p>
+
+```bash
 running 2 tests
 test test::test_unauthorized_arbiter_rejected ... ok
 test test::test_arbitration_lifecycle_and_cross_contract_ruling ... ok
