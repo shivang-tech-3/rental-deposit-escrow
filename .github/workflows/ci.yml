@@ -41,10 +41,10 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run Vitest Unit Tests
-        run: npm run test
+        run: npx vitest run
 
       - name: Build Next.js
         run: npm run build
