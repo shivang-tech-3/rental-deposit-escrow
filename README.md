@@ -411,7 +411,7 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 |---|---|---|
 | 📦 **GitHub Repository** | [shivang-tech-3/rental-deposit-escrow](https://github.com/shivang-tech-3/rental-deposit-escrow) | Full source code with smart contracts & Next.js frontend |
 | 🌐 **Live Application** | [rental-deposit-escrow.netlify.app](https://rentaldepositescrow.netlify.app/) | Deployed Next.js Application on Netlify |
-| 📺 **Demo Video** | [Watch on YouTube](https://www.youtube.com) | 1–2 minute project walkthrough |
+| 📺 **Demo Video** | [Watch on YouTube](https://youtu.be/m5V1T3I4nPQ) | 1–2 minute project walkthrough |
 | 📑 **Integration Guide** | [FRONTEND_INTEGRATION.md](FRONTEND_INTEGRATION.md) | Soroban contract function matching & TypeScript guide |
 
 ---
