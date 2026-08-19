@@ -1,0 +1,15 @@
+[package]
+name = "rental-arbitration"
+version = "0.1.0"
+edition = "2021"
+description = "Decentralized arbitration and dispute resolution smart contract on Stellar Soroban"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

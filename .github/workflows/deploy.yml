@@ -1,0 +1,81 @@
+name: Deploy Contracts to Stellar Testnet
+
+on:
+  workflow_dispatch:
+    inputs:
+      network:
+        description: "Target Network (testnet, futurenet, mainnet)"
+        required: true
+        default: "testnet"
+
+jobs:
+  deploy:
+    name: Build and Deploy Soroban Contracts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install Stellar CLI
+        run: cargo install --locked stellar-cli --features opt
+
+      - name: Configure Network
+        run: |
+          stellar network add \
+            --global testnet \
+            --rpc-url https://soroban-testnet.stellar.org:443 \
+            --network-passphrase "Test SDF Network ; September 2015"
+
+      - name: Import Deployer Identity
+        env:
+          DEPLOYER_SECRET: ${{ secrets.STELLAR_DEPLOYER_SECRET }}
+        run: |
+          if [ -n "$DEPLOYER_SECRET" ]; then
+            stellar keys add deployer --secret-key <<< "$DEPLOYER_SECRET"
+          else
+            stellar keys generate deployer --network testnet --fund
+          fi
+
+      - name: Build Contracts
+        run: |
+          stellar contract build
+
+      - name: Deploy Escrow Contract
+        id: deploy_escrow
+        run: |
+          ESCROW_ID=$(stellar contract deploy \
+            --wasm target/wasm32-unknown-unknown/release/rental_escrow.wasm \
+            --source deployer \
+            --network testnet)
+          echo "ESCROW_CONTRACT_ID=$ESCROW_ID" >> $GITHUB_ENV
+          echo "Deployed Escrow: $ESCROW_ID"
+
+      - name: Deploy Arbitration Contract
+        id: deploy_arb
+        run: |
+          ARB_ID=$(stellar contract deploy \
+            --wasm target/wasm32-unknown-unknown/release/rental_arbitration.wasm \
+            --source deployer \
+            --network testnet)
+          echo "ARBITRATION_CONTRACT_ID=$ARB_ID" >> $GITHUB_ENV
+          echo "Deployed Arbitration: $ARB_ID"
+
+      - name: Initialize Contracts
+        run: |
+          DEPLOYER_ADDR=$(stellar keys address deployer)
+          stellar contract invoke \
+            --id $ESCROW_CONTRACT_ID \
+            --source deployer \
+            --network testnet \
+            -- initialize --admin $DEPLOYER_ADDR
+
+          stellar contract invoke \
+            --id $ARBITRATION_CONTRACT_ID \
+            --source deployer \
+            --network testnet \
+            -- initialize --admin $DEPLOYER_ADDR
