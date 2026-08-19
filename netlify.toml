@@ -1,0 +1,15 @@
+[build]
+  base = "frontend"
+  publish = ".next"
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
+  NEXT_PUBLIC_ESCROW_CONTRACT_ID = "CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ"
+  NEXT_PUBLIC_ARBITRATION_CONTRACT_ID = "CBVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ"
+  NEXT_PUBLIC_STELLAR_NETWORK = "TESTNET"
+  NEXT_PUBLIC_STELLAR_RPC_URL = "https://soroban-testnet.stellar.org"
