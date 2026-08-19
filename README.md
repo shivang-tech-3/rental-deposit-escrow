@@ -13,7 +13,7 @@
 
 - [x] **Public GitHub Repository**: [https://github.com/shivang-tech-3/rental-deposit-escrow](https://github.com/shivang-tech-3/rental-deposit-escrow)
 - [x] **README.md & Frontend Integration Guide**: Setup instructions, architecture, contract specs, and [`FRONTEND_INTEGRATION.md`](FRONTEND_INTEGRATION.md) function matching documentation
-- [x] **Minimum 10+ Meaningful Commits**: [14+ Commits on `main`](https://github.com/shivang-tech-3/rental-deposit-escrow/commits/main)
+- [x] **Minimum 10+ Meaningful Commits**: [20+ Commits on `main`](https://github.com/shivang-tech-3/rental-deposit-escrow/commits/main)
 - [x] **Live Demo Link**: [https://rental-deposit-escrow.netlify.app](https://rental-deposit-escrow.netlify.app)
 - [x] **Smart Contracts Deployed on Stellar Testnet**:
   - **Rental Escrow**: [`CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ`](https://stellar.expert/explorer/testnet/contract/CAVU37P2N6F5VNJT77FZX2J2X2V6P5VNJT77FZX2J2X2V6P5VNJT77FZ)
