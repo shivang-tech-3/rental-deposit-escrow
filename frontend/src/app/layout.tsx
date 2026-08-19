@@ -19,9 +19,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "StellarVault | Trustless Rental Deposit Escrow on Soroban",
+  title: "StellarVault | Trustless Rental Deposit Escrow",
   description:
-    "Lock rental deposits on-chain with automatic checkout release and transparent arbitration. Powered by Stellar Soroban smart contracts.",
+    "Lock rental deposits on-chain with automatic checkout release and transparent arbitration.",
 };
 
 export default function RootLayout({

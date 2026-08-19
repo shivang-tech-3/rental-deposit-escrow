@@ -9,7 +9,7 @@ export function Footer() {
             <ShieldCheck className="w-3.5 h-3.5 text-cyan-300" />
           </div>
           <span className="text-slate-300 font-medium">
-            Stellar Rental Deposit Escrow • Built on Soroban Smart Contracts
+            StellarVault • Trustless On-Chain Rental Deposit Escrow
           </span>
         </div>
 
